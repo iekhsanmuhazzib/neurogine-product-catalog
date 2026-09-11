@@ -1,4 +1,4 @@
-package com.iekhsan.productcatalog
+package com.iekhsan.productcatalog.data
 
 data class Product(
     val id: Int,
