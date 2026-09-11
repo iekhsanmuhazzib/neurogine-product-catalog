@@ -19,16 +19,57 @@ Where AI (Claude) was used for guidance/research, that's noted per the assignmen
 
 ## Entries
 
-### \[11 Sept 2026] Stack decision: Kotlin + Jetpack Compose
+### [11 Sept 2026, ~9:30 AM] Stack decision: Kotlin + Jetpack Compose
 
-I chose Kotlin because it had the lowest barrier to entry for me. I'd already built a full Android app in Java (banking app project), so the SDK, project structure, and general Android workflow were already familiar. I did look at Flutter, Swift, React Native, and Kotlin Multiplatform first, but each would mean learning a new language and SDK at the same time, not practical on a 7-day deadline. Kotlin let me spend most of my limited setup time on Jetpack Compose and architecture instead of the basics.
+I chose Kotlin because it had the lowest barrier to entry for me. I'd already
+built a full Android app in Java (banking app project), so the SDK, project
+structure, and general Android workflow were already familiar. I did look at
+Flutter, Swift, React Native, and Kotlin Multiplatform first, but each would
+mean learning a new language and SDK at the same time, not practical on a
+7-day deadline. Kotlin let me spend most of my limited setup time on Jetpack
+Compose and architecture instead of the basics.
 
-**AI usage note:** Used Claude to lay out tradeoffs between the 5 allowed stacks and to plan
-a study/implementation schedule. Final stack choice and reasoning above are my own.
+---
 
-\---
+### [11 Sept 2026, ~10:00 AM] Environment setup & first run
 
-### \[ ] Environment setup \& API verification — *(fill in once done on study day)*
+Started by verifying that Android Studio was up to date and creating a
+quick test project to make sure Jetpack Compose was working properly. I
+set up a physical Poco F7 Pro for testing, which required enabling the
+"Install via USB" setting in HyperOS. After fixing a build error by
+updating compileSdk to 37 in build.gradle.kts, the test app ran
+successfully on the device.
+
+---
+
+### [11 Sept 2026, ~10:30 AM] API response shapes verified
+
+I tested the three DummyJSON endpoints (list, detail, and search) directly
+in the browser to check their actual JSON structures. I confirmed that the
+list and search endpoints return a wrapper object containing a products
+list along with pagination fields (total, skip, and limit). On the other
+hand, the detail endpoint returns a single product object directly without
+a wrapper. Because of this, I will build two separate data models: one for
+the paginated list responses and another for single product details.
+
+---
+
+### [11 Sept 2026, ~11:36 AM] Scoping the Product data model
+
+I went through the full DummyJSON product object (22+ fields) and
+cross-checked against the assignment's actual required features, then
+removed unused fields to match the assignment goals. Instead of building
+extra filtering options right away, I kept the Product model focused
+strictly on what the list view and detail view need. This kept the app
+clean, and I noted extra filtering features as a possible future
+improvement.
+
+---
+
+**AI usage note (for this session's entries):** Used Claude for guidance across
+today's decisions — comparing stack tradeoffs, talking through the SDK version
+fix, and scoping the Product model fields. All final decisions, code, and
+reasoning above are my own.
 
 \---
 
