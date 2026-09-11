@@ -21,8 +21,7 @@ Where AI (Claude) was used for guidance/research, that's noted per the assignmen
 
 ### \[11 Sept 2026] Stack decision: Kotlin + Jetpack Compose
 
-*(Write 3-5 sentences here in your own words: why Kotlin over the other 4 options, given your
-Java/Android background. Mention the JVM/SDK overlap, and your call on Compose vs XML.)*
+I chose Kotlin because it had the lowest barrier to entry for me. I'd already built a full Android app in Java (banking app project), so the SDK, project structure, and general Android workflow were already familiar. I did look at Flutter, Swift, React Native, and Kotlin Multiplatform first, but each would mean learning a new language and SDK at the same time, not practical on a 7-day deadline. Kotlin let me spend most of my limited setup time on Jetpack Compose and architecture instead of the basics.
 
 **AI usage note:** Used Claude to lay out tradeoffs between the 5 allowed stacks and to plan
 a study/implementation schedule. Final stack choice and reasoning above are my own.
