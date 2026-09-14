@@ -66,6 +66,23 @@ improvement.
 
 ---
 
+### [14 Sept 2026, ~9:00 AM] Retrofit interface: list + detail endpoints
+
+Set up Retrofit and OkHttp dependencies via the version catalog to keep
+things consistent with the rest of the project. Created ProductInfo.kt
+to model the paginated API response (products list + total/skip/limit),
+since this shape is different from a single Product. Then wrote
+DummyJsonApi.kt with two endpoints: getProducts() for the list (using
+@Query for limit/skip) and getProductDetail() for a single item (using
+@Path for the id). Spent some time understanding what Retrofit
+annotations actually do — initially confused @Path and @Query, and
+mistakenly thought total/skip/limit needed separate API calls, before
+realizing they're just fields bundled inside the same ProductInfo
+response. Traced through an actual example request step-by-step to get
+it to click.
+
+---
+
 **AI usage note (for this session's entries):** Used Claude for guidance across
 today's decisions — comparing stack tradeoffs, talking through the SDK version
 fix, and scoping the Product model fields. All final decisions, code, and
