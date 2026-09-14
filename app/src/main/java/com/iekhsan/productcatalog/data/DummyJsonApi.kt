@@ -16,4 +16,9 @@ interface DummyJsonApi {
     suspend fun getProductsInfo(
         @Path("id") id : Int
     ): Product
+
+    @GET ("products/search")
+    suspend fun searchProducts(
+        @Query("q") q : String
+    ): ProductInfo
 }
