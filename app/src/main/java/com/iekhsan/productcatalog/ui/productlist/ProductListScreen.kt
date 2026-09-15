@@ -26,10 +26,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.OutlinedTextField
 import kotlinx.coroutines.delay
+import androidx.compose.foundation.clickable
 
 @Composable
 fun ProductListScreen(
-    viewModel: ProductListViewModel = viewModel()
+    viewModel: ProductListViewModel = viewModel(),
+    onProductClick: (Int) -> Unit
 ) {
     val listState = rememberLazyListState()
 
@@ -87,7 +89,11 @@ fun ProductListScreen(
             is ProductListUiState.Success -> {
                 LazyColumn(state = listState) {
                     items(state.products) { product ->
-                        Row(modifier = Modifier.padding(16.dp)) {
+                        Row(
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .clickable { onProductClick(product.id) }
+                        ) {
                             AsyncImage(
                                 model = product.thumbnail,
                                 contentDescription = product.title,
