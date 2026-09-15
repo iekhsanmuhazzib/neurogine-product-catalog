@@ -20,6 +20,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.iekhsan.productcatalog.data.ProductListUiState
+import coil.compose.AsyncImage
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 
 @Composable
 fun ProductListScreen(
@@ -68,9 +71,16 @@ fun ProductListScreen(
         is ProductListUiState.Success -> {
             LazyColumn(state = listState) {
                 items(state.products) { product ->
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(text = product.title)
-                        Text(text = "$${product.price}")
+                    Row(modifier = Modifier.padding(16.dp)) {
+                        AsyncImage(
+                            model = product.thumbnail,
+                            contentDescription = product.title,
+                            modifier = Modifier.size(80.dp)
+                        )
+                        Column(modifier = Modifier.padding(start = 12.dp)) {
+                            Text(text = product.title)
+                            Text(text = "$${product.price}")
+                        }
                     }
                 }
             }
