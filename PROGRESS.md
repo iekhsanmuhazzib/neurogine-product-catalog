@@ -116,34 +116,51 @@ server-side behavior outside the app's control, not a client bug.
 
 ---
 
+### [15 Sept 2026, ~11:30 AM] Product detail screen with navigation
+
+Added Navigation Compose to move between the list and detail screens,
+using a route like "productDetail/{id}" to pass the tapped product's ID.
+Built ProductDetailViewModel (using a ViewModelProvider.Factory since it
+needs the product ID passed into its constructor, unlike the list
+ViewModel) and ProductDetailScreen showing a horizontally scrollable
+image row, title, price, rating, and full description.
+
+Hit a build error calling a function I'd misnamed earlier in the
+Retrofit interface (getProductsInfo instead of the getProductDetail I
+referenced from the ViewModel) - simple naming mismatch, fixed by using
+the actual function name. All 5 required features plus layered
+architecture are now complete and tested on the emulator.
+
+---
+
 **AI usage note (for this session's entries):** Used Claude for guidance across
 today's decisions — comparing stack tradeoffs, talking through the SDK version
-fix, and scoping the Product model fields. All final decisions, code, and
-reasoning above are my own.
+fix, scoping the Product model fields, and working through navigation/detail
+screen concepts. All final decisions, code, and reasoning above are my own.
 
 \---
 
-### \[ ] Phase 1: Data layer (models, Retrofit service, repository)
+### \[x] Phase 1: Data layer (models, Retrofit service, repository)
 
 \---
 
-### \[ ] Phase 2: Product list + pagination
+### \[x] Phase 2: Product list + pagination
 
 \---
 
-### \[ ] Phase 3: Loading/error/empty/success states
+### \[x] Phase 3: Loading/error/empty/success states
 
 \---
 
-### \[ ] Phase 4: Detail screen
+### \[x] Phase 4: Detail screen
 
 \---
 
-### \[ ] Phase 5: Debounced search
+### \[x] Phase 5: Debounced search
 
 \---
 
-### \[ ] Phase 6: Layer/architecture cleanup
+### \[x] Phase 6: Layer/architecture cleanup
 
 \---
 
