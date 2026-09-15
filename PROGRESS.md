@@ -83,7 +83,7 @@ it to click.
 
 ---
 
-### [15 Sept 2026] Debounced search implementation + pagination race condition
+### [15 Sept 2026, ~10:00 AM] Debounced search implementation + pagination race condition
 
 Implemented server-side search (via the DummyJSON search endpoint) with
 debouncing using LaunchedEffect + delay(500ms), so a network call only
@@ -105,7 +105,7 @@ respects.
 
 ---
 
-### [15 Sept 2026] Search matches fields beyond the visible title
+### [15 Sept 2026, ~11:00 AM] Search matches fields beyond the visible title
 
 Noticed that searching for short substrings (e.g. "re") sometimes returns
 products whose titles don't obviously contain the term (e.g. "Eyeshadow
