@@ -83,6 +83,39 @@ it to click.
 
 ---
 
+### [15 Sept 2026] Debounced search implementation + pagination race condition
+
+Implemented server-side search (via the DummyJSON search endpoint) with
+debouncing using LaunchedEffect + delay(500ms), so a network call only
+fires after the user pauses typing rather than on every keystroke.
+
+Chose server-side over client-side search because the app only loads a
+partial slice of the 194 total products at any time (due to pagination) -
+client-side filtering would miss products not yet scrolled to.
+
+Hit a bug where search results would flash correctly, then immediately
+revert back to the full unfiltered list. Traced this to a race condition:
+when search results replaced the list with a small number of items, the
+scroll-detection logic (used for pagination) would incorrectly treat this
+as "near the bottom of the list" and auto-trigger loadMoreProducts(),
+which had no awareness that a search was active and would overwrite the
+search results with normal paginated data. Fixed by adding an
+isSearchActive flag that pagination's loadMoreProducts() checks and
+respects.
+
+---
+
+### [15 Sept 2026] Search matches fields beyond the visible title
+
+Noticed that searching for short substrings (e.g. "re") sometimes returns
+products whose titles don't obviously contain the term (e.g. "Eyeshadow
+Palette with Mirror"). This is because DummyJSON's search endpoint
+appears to match against the full product object (likely description,
+category, etc.), not just the title field shown in the UI. This is
+server-side behavior outside the app's control, not a client bug.
+
+---
+
 **AI usage note (for this session's entries):** Used Claude for guidance across
 today's decisions — comparing stack tradeoffs, talking through the SDK version
 fix, and scoping the Product model fields. All final decisions, code, and
