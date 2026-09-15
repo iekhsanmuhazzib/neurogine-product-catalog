@@ -20,12 +20,14 @@ class ProductListViewModel : ViewModel() {
     private val pageSize = 20
     private var totalProducts = 0
     private var isLoading = false
+    private var isSearchActive = false
 
     init {
         loadMoreProducts()
     }
 
     fun loadMoreProducts() {
+        if (isSearchActive) return
         if (isLoading) return
         if (loadedProducts.isNotEmpty() && currentSkip >= totalProducts) return
 
@@ -50,6 +52,39 @@ class ProductListViewModel : ViewModel() {
                 uiState = ProductListUiState.Error(e.message ?: "Something went wrong")
             }
             isLoading = false
+        }
+    }
+
+    var searchQuery by mutableStateOf("")
+
+    fun onSearchQueryChanged(query: String) {
+        searchQuery = query
+    }
+
+    fun searchProducts(query: String) {
+        if (query.isBlank()) {
+            isSearchActive = false
+            loadedProducts = emptyList()
+            currentSkip = 0
+            totalProducts = 0
+            loadMoreProducts()
+            return
+        }
+
+        isSearchActive = true
+
+        viewModelScope.launch {
+            uiState = ProductListUiState.Loading
+            try {
+                val result = RetrofitInstance.api.searchProducts(query)
+                uiState = if (result.products.isEmpty()) {
+                    ProductListUiState.Empty
+                } else {
+                    ProductListUiState.Success(result.products)
+                }
+            } catch (e: Exception) {
+                uiState = ProductListUiState.Error(e.message ?: "Something went wrong")
+            }
         }
     }
 
